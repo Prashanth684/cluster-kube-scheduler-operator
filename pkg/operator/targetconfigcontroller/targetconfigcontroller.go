@@ -185,6 +185,8 @@ func manageKubeSchedulerConfigMap_v311_00_to_latest(ctx context.Context, client 
 			kubeSchedulerConfiguration = bindata.MustAsset("assets/config/defaultconfig-postbootstrap-highnodeutilization.yaml")
 		case v1.NoScoring:
 			kubeSchedulerConfiguration = bindata.MustAsset("assets/config/defaultconfig-postbootstrap-noscoring.yaml")
+		case v1.MultiArchSchedulers:
+			kubeSchedulerConfiguration = bindata.MustAsset("assets/config/defaultconfig-postbootstrap-multiarchschedulers.yaml")
 		default:
 			return nil, false, fmt.Errorf("profile %q not recognized", config.Spec.Profile)
 		}

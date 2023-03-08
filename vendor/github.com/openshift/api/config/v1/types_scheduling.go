@@ -35,7 +35,7 @@ type SchedulerSpec struct {
 	// profile sets which scheduling profile should be set in order to configure scheduling
 	// decisions for new pods.
 	//
-	// Valid values are "LowNodeUtilization", "HighNodeUtilization", "NoScoring"
+	// Valid values are "LowNodeUtilization", "HighNodeUtilization", "NoScoring", "MultiArchSchedulers"
 	// Defaults to "LowNodeUtilization"
 	// +optional
 	Profile SchedulerProfile `json:"profile,omitempty"`
@@ -73,7 +73,7 @@ type SchedulerSpec struct {
 	MastersSchedulable bool `json:"mastersSchedulable"`
 }
 
-// +kubebuilder:validation:Enum="";LowNodeUtilization;HighNodeUtilization;NoScoring
+// +kubebuilder:validation:Enum="";LowNodeUtilization;HighNodeUtilization;NoScoring;MultiArchSchedulers
 type SchedulerProfile string
 
 var (
@@ -88,6 +88,10 @@ var (
 	// NoScoring defines a scheduling profile which tries to provide lower-latency scheduling
 	// at the expense of potentially less optimal pod placement decisions.
 	NoScoring SchedulerProfile = "NoScoring"
+
+	// MultiArchSchedulers defines a scheduling profile with various optional schedulers which can be used to
+	// pin workloads on desired architectures nodes. Support schedulers for strong as well as weak affinity placements.
+	MultiArchSchedulers SchedulerProfile = "MultiArchSchedulers"
 )
 
 type SchedulerStatus struct {
